@@ -1,0 +1,23 @@
+<div class="container">
+    <form [formGroup]="signUpForm" class="form">
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password">
+        </mat-form-field>
+
+        <button mat-stroked-button color="primary" class="full-width">Sign up</button>
+
+    </form>
+
+</div>
