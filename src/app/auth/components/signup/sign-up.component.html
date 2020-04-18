@@ -1,23 +1,53 @@
 <div class="container">
-    <form [formGroup]="signUpForm" class="form">
+  <form [formGroup]="signUpForm" class="form" (ngSubmit)="signUp()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input type="text" matInput formControlName="email" />
+    </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Email</mat-label>
-            <input type="text" matInput formControlName="email">
-        </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username" />
+    </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Username</mat-label>
-            <input type="text" matInput formControlName="username">
-        </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <input #password type="password" matInput formControlName="password" />
+    </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password">
-        </mat-form-field>
+    <div style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+      <mat-password-strength
+        #strength
+        [password]="password.value"
+        [enableLengthRule]="true"
+        [enableDigitRule]="true"
+        [enableLowerCaseLetterRule]="true"
+        [enableUpperCaseLetterRule]="true"
+        [enableSpecialCharRule]="true"
+      >
+      </mat-password-strength>
+      <mat-password-strength-info
+        [passwordComponent]="strength"
+        [digitsCriteriaMsg]="'The password must contain at least 1 digit'"
+        [minCharsCriteriaMsg]="'The password must contains at least 8 chars'"
+        [specialCharsCriteriaMsg]="
+          'The password must contain 1 special char like (!£$%^&*()@~?,/.)'
+        "
+      >
+      </mat-password-strength-info>
+    </div>
 
-        <button mat-stroked-button color="primary" class="full-width">Sign up</button>
+    <div *ngIf="errors.password">
+      <mat-error>Password</mat-error>
+      <ol>
+        <mat-error *ngFor="let error of errors.password">
+          {{ error }}
+        </mat-error>
+      </ol>
+    </div>
 
-    </form>
-
+    <button mat-stroked-button color="primary" class="full-width" type="submit">
+      Sign up
+    </button>
+  </form>
 </div>
